@@ -1,0 +1,7 @@
+.devcontainer/
+code/
+log/
+test/
+tmp/
+tmp_python/
+video/
