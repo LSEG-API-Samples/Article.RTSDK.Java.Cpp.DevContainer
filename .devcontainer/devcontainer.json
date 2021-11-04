@@ -2,7 +2,10 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/
 {
 	"name": "RTSDK_Java",
+	//"name": "RTSDK_CPP",
 	"image": "refinitivapis/realtimesdk_java:latest",
+	//"image": "refinitivapis/realtimesdk_c:latest",
 	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
-	"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
+	//"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Cpp-C",
+	//"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
 }
