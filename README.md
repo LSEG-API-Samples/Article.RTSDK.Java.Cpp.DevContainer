@@ -77,7 +77,6 @@ Let's start with a ```devcontainer.json``` file that pulls the refinitivapis/rea
 {
 	"name": "RTSDK_Java",
 	"image": "refinitivapis/realtimesdk_java:latest",
-	"extensions": ["vscjava.vscode-java-pack"],
 	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
 }
 ```
@@ -85,7 +84,6 @@ The ```devcontainer.json``` file above sets the following development properties
 
 - ```name```: Using "RTSDK_Java" as a display name of the container.
 - ```image```: Pull "refinitivapis/realtimesdk_java" Docker image from DockerHub [https://hub.docker.com/r/refinitivapis/realtimesdk_java](https://hub.docker.com/r/refinitivapis/realtimesdk_java) URL.
-- ```extensions```: An array of extension IDs that specify the extensions that should be installed inside the container when it is created. This ```devcontainer.json``` installs the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) in the development container.
 - ```workspaceFolder```: Sets the default path that VS Code should open when connecting to the container. This ```devcontainer.json``` sets the default path to **/opt/refinitiv/Real-Time-SDK/Java** which is the RTSDK Java package location in the container.
 
 ### <a id=""></a>Running the Development Container
@@ -106,10 +104,11 @@ After the build completes, VS Code automatically connects to the container at th
 
 ![figure-6](images/06_dev_container_toolbar.png "Dev Container toolbar")
 
-If you click this toolbar, the VS Code shows the Container Remote connection options at the top of the editor.
+If you click this toolbar, the VS Code shows the Container Remote connection menu options at the top of the editor.
 
 ![figure-7](images/07_dev_container_menu.png "Dev Container menu")
 
+To close the remote connection, choose the "Close Remote Connection" menu.
 
 Now your VS Code and Dev container are ready to run.
 
@@ -152,6 +151,77 @@ If you have your own RTDS server in your environment, you can modify the example
 
 Then, developers can run this example application with ```./gradlew runconsumer100``` command.
 
+## <a id=""></a>File Sharing between the Host and Dev Container
+
+Please note that all changes (newly created/modified files and folders) stay in the Dev container as long as the container is exist (status **Up** and **Exited**). However, if you remove the container (```docker rm```), that container and its data are destroyed. You can additional mount points to add to the container when created for sharing files between the host and Dev container with a devcontainer.json's ```mounts``` attribute.
+
+```
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/
+{
+	"name": "RTSDK_Java",
+	"image": "refinitivapis/realtimesdk_java:latest",
+	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
+	"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
+}
+
+```
+
+The ```devcontainer.json``` file above mounts the current ```<host workspace location>/log``` folder to the ```/opt/refinitiv/Real-Time-SDK/Java/log``` folder in a container. If the folder are not exist (either host or container), the VS Code automatic creates folder(s) for you.
+
+**Caution**: Please note that if you mount a host folder to existing container folder (example: /opt/refinitiv/Real-Time-SDK/Java), the container folder will be replaced by a host folder.
+
+Please find more details regarding the mounts property from the [VS Code - Add another local file mount](https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount#advancedcontainers-articles) page.
+
+### <a id=""></a>Adding EMA Java Log
+
+The best scenario to demonstrate this feature is enabling the EMA API log messages to capture the API and HTTP REST activities. You do not need to close the remote-connection before updating the devcontainer.json. You can choose the "Open Container Configuration File" in the remote connection menu to open the current devcontainer.json file.
+
+![figure-12](images/12_open_configuration.png "Open container config file")
+
+The current devcontainer.json file will be shown in the VS Code editor, you can add the ```"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]``` configuration to the file.
+
+![figure-13](images/13_add_mounts.png "Adding a mount point")
+
+Next, choose the "Rebuild Container" from the remote connection menu.
+
+![figure-14](images/14_rebuild_container.png "Rebuild container")
+
+After the re-build completes, VS Code automatically the log folders in the host and */opt/refinitiv/Real-Time-SDK/Java/log* folder.  
+
+![figure-15](images/15_ad_mount_success.png "Adding a mount point success")
+
+To enable the EMA Java log file, create a [Java Logging API](https://docs.oracle.com/javase/8/docs/api/java/util/logging/package-summary.html) ```logging.properties``` file in the */opt/refinitiv/Real-Time-SDK/Java/log* folder with the following content:
+
+```
+.level=FINEST
+
+handlers=java.util.logging.FileHandler, java.util.logging.ConsoleHandler
+
+java.util.logging.ConsoleHandler.level=FINEST
+java.util.logging.ConsoleHandler.formatter=java.util.logging.SimpleFormatter
+
+com.refinitiv.eta.valueadd.reactor.RestReactor.level=FINEST
+java.util.logging.FileHandler.level=FINEST
+java.util.logging.FileHandler.pattern=/opt/refinitiv/Real-Time-SDK/Java/log/ema.log
+ 
+# Format timestamp as date/time with millisecond
+java.util.logging.SimpleFormatter.format=%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS.%1$tL %4$-7s %2$s %n%5$s
+```
+
+A logging configuration file sets the EMA API to logs all API messages to the ```/opt/refinitiv/Real-Time-SDK/Java/log/ema.log``` file. 
+
+Finally, run the EMA Java ex450_MP_QueryServiceDiscovery RTO example with the ```-PvmArgs="-Djava.util.logging.config.file=/opt/refinitiv/Real-Time-SDK/Java/log/logging.properties"``` argument.
+
+
+```
+$>../gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>" -PvmArgs="-Djava.util.logging.config.file=/opt/refinitiv/Real-Time-SDK/Java/log/logging.properties"
+```
+Then the API activities, HTTP REST messages log messages are stored inn the ```ema.log``` file, the logging.properties and log files are available in the host machine too.
+
+![figure-16](images/16_log_success.png "Log success")
+
+You can mount other folders to keep the modification codes from the Dev Container back to the host too (note: Do not mount folders to the container existing folders).
 
 ## <a id="ref"></a>References
 

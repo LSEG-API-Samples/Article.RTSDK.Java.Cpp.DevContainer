@@ -3,10 +3,6 @@
 {
 	"name": "RTSDK_Java",
 	"image": "refinitivapis/realtimesdk_java:latest",
-	//"image": "refinitivapis/realtimesdk_c:latest",
-	"extensions": ["vscjava.vscode-java-pack"],
-	//"forwardPorts": [3000],
 	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
-	//"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Cpp-C",
-	//"workspaceMount": "source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"
+	"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
 }
