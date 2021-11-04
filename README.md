@@ -102,9 +102,22 @@ Next, the VS Code window (instance) will reload, pull (or clone) the image, and 
 
 ![figure-5](images/05_pulling_container.png "Pull and Build dev container")
 
-After the build completes, VS Code automatically connects to the container at the path we set to the ```workspaceFolder``` property which is the **/opt/refinitiv/Real-Time-SDK/Java** folder. All files and sub-folders are available in the Code explorer. If you open a terminal (``` Ctrl+` ``` or ``` Ctrl+Shift+` ``` - Windows), the current location is  **/opt/refinitiv/Real-Time-SDK/Java** folder too (You can navigate to other locations in the container as well)
+After the build completes, VS Code automatically connects to the container at the path we set to the ```workspaceFolder``` property which is the **/opt/refinitiv/Real-Time-SDK/Java** folder.  You can check the VS Code Remote connection status from the button left toolbar.
 
-![figure-6](images/06_pull_container_success.png "Pull and Build dev container success")
+![figure-6](images/06_dev_container_toolbar.png "Dev Container toolbar")
+
+If you click this toolbar, the VS Code shows the Container Remote connection options at the top of the editor.
+
+![figure-7](images/07_dev_container_menu.png "Dev Container menu")
+
+
+Now your VS Code and Dev container are ready to run.
+
+### <a id=""></a>Running the RTSDK Java Examples
+
+All files and sub-folders are available in the Code explorer. If you open a terminal (``` Ctrl+` ``` or ``` Ctrl+Shift+` ``` - Windows), the current location is  **/opt/refinitiv/Real-Time-SDK/Java** folder too (You can navigate to other locations in the container as well)
+
+![figure-8](images/08_pull_container_success.png "Pull and Build dev container success")
 
 The *refinitivapis/realtimesdk_java* Docker image has built-in all RTSDK Java dependencies and build system, so you can run the SDK examples with the Gradle tool from the VS Code terminal. I am demonstrating with the EMA Java Consumer - Interactive Provider scenario example.
 
@@ -121,8 +134,23 @@ $>./gradlew runconsumer100
 ```
 The results of EMA Java Consumer - Interactive Provider examples scenario is shown below.
 
-![figure-7](images/07_run_examples.gif "Running Consumer and Interactive Provider examples")
+![figure-9](images/09_run_examples.gif "Running Consumer and Interactive Provider examples")
 
+You can run the RTO example, EMA Java ex450_MP_QueryServiceDiscovery with the following command.
+
+```
+$>../gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>"
+```
+
+The result is shown below.
+
+![figure-10](images/10_run_rto_example.gif "Running RTO example")
+
+If you have your own RTDS server in your environment, you can modify the example code to match your RTDS connection requirement. The following example shows the ex100_MP_Streaming example that has been changed the RTDS server endpoint, service name, and RIC name.
+
+![figure-11](images/11_rtds_code.png "Modify the code")
+
+Then, developers can run this example application with ```./gradlew runconsumer100``` command.
 
 
 ## <a id="ref"></a>References
