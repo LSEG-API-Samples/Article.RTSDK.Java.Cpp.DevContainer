@@ -1,4 +1,4 @@
-# How to Develop the Real-Time application inside the 
+# How to use the Refinitiv Real-Time SDK Docker Images on the Visual Studio Code with the Remote - Containers extension
 - version: 1.0.0
 - Last update: November 2021
 - Environment: Docker
@@ -11,7 +11,7 @@
 
 VS Code provides a lot of extensions that extend the editor features and development workflows (Example: the [REST Client](https://developers.refinitiv.com/en/article-catalog/article/how-to-test-refinitiv-data-platform-rest-api-easily-with-visual-studio-code) and [Thunder Client](https://developers.refinitiv.com/en/article-catalog/article/how-to-test-http-rest-api-easily-with-visual-studio-code---thund) testing tools). The editor also supports the [remote development](https://code.visualstudio.com/docs/remote/remote-overview) that lets you use a container, remote machine, or the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/windows/wsl) as a full-featured development environment with the [Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack).
 
-As part of the Remote Development Extension Pack, the [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension lets developers use a Docker container as a full-featured development environment. It allows developer to open any folder inside (or mounted into) a container and take advantage of Visual Studio Code's full feature set (IntelliSense , code navigation, debugging, etc) as a local-quality development experience.
+As part of the Remote Development Extension Pack, the [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension lets developers use a Docker container as a full-featured development environment. It allows the developer to open any folder inside (or mounted into) a container and take advantage of Visual Studio Code's full feature set (IntelliSense, code navigation, debugging, etc) as a local-quality development experience.
 
 ![figure-1](images/01_architecture-containers.png "Visual Studio Code Remote - Containers diagram")
 
@@ -23,11 +23,11 @@ This article demonstrates how to use the VS Code Remote - Containers extension w
 
 [Refinitiv Real-Time SDK](https://developers.refinitiv.com/en/use-cases-catalog/refinitiv-real-time) (RTSDK, formerly known as Elektron SDK) is a suite of modern and open source APIs that aim to simplify development through a strong focus on ease of use and standardized access to a broad set of Refinitiv proprietary content and services via the proprietary TCP connection named RSSL and proprietary binary message encoding format named OMM Message. 
 
- The SDK source code is available on [GitHub](https://github.com/Refinitiv/Real-Time-SDK), developers can built the RTSDK C++ and Java libraries with the [CMake](https://cmake.org/) and [Gradle](https://gradle.org/) build automation tools respectively. If developers is new to the SDK, they can use the following RTSDK Docker images to set up and learn the SDK quickly.
+ The SDK source code is available on [GitHub](https://github.com/Refinitiv/Real-Time-SDK), developers can build the RTSDK C++ and Java libraries with the [CMake](https://cmake.org/) and [Gradle](https://gradle.org/) build automation tools respectively. If developers are new to the SDK, they can use the following RTSDK Docker images to set up and learn the SDK quickly.
  * [refinitivapis/realtimesdk_c](https://hub.docker.com/r/refinitivapis/realtimesdk_c): This docker image contains the latest version of the RTSDK C/C++ libraries and examples. 
  * [refinitivapis/realtimesdk_java](https://hub.docker.com/r/refinitivapis/realtimesdk_java): This docker image contains the latest version of the RTSDK Java libraries and examples. 
 
-The images have all dependencies and the building system pre-installed. You can check my colleague's [Introduction to the refinitivapis/realtimesdk_c Docker Image](https://developers.refinitiv.com/en/article-catalog/article/introduction-to-the-refinitivapis-elektronsdkc-docker-image) and [Introduction to the refinitivapis/realtimesdk_java Docker Image](https://developers.refinitiv.com/en/article-catalog/article/introduction-to-the-refinitivapis-realtimesdkjava-docker-image) articles that show a step-by-step guide to deploy and run the RTSDK Docker images via the Docker command line. This article is focusing on access the images with VS Code editor.
+The images have all dependencies and the building system pre-installed. You can check my colleague's [Introduction to the refinitivapis/realtimesdk_c Docker Image](https://developers.refinitiv.com/en/article-catalog/article/introduction-to-the-refinitivapis-elektronsdkc-docker-image) and [Introduction to the refinitivapis/realtimesdk_java Docker Image](https://developers.refinitiv.com/en/article-catalog/article/introduction-to-the-refinitivapis-realtimesdkjava-docker-image) articles that show a step-by-step guide to deploy and run the RTSDK Docker images via the Docker command line. This article is focusing on accessing the images with VS Code editor.
  
  If you are using the WebSocket API, there is the [refinitivapis/websocket_api](https://hub.docker.com/r/refinitivapis/websocket_api) docker image that contains the latest version WebSocket API Examples too.
 
@@ -55,8 +55,8 @@ The basic configuration parameters are as follows:
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/
 {
-	"name": "RTSDK_Java",
-	"image": "refinitivapis/realtimesdk_java:latest",
+    "name": "RTSDK_Java",
+    "image": "refinitivapis/realtimesdk_java:latest",
 }
 ```
 The detail of the configurations above are:
@@ -65,21 +65,21 @@ The detail of the configurations above are:
 
 The development container lets you pull images from [DockerHub](https://hub.docker.com/), [GitHub](https://docs.github.com/en/packages/guides/about-github-container-registry), and [Azure](https://azure.microsoft.com/services/container-registry/) Container Registry repositories, and then perform additional tasks such as install development tools (Git, etc.), install VS Code extensions, forward ports, set runtime arguments, etc.
 
-The development container is not limited to Docker images, it supports [Dockerfile](https://code.visualstudio.com/docs/remote/create-dev-container#_dockerfile) and [Docker Compose](https://code.visualstudio.com/docs/remote/create-dev-container#_use-docker-compose) too. You can build own image(s) to match your development requirements, and then share ```Dockerfile``` and/or ```docker-compose.yml``` inside a ```.devcontainer``` folder (with a ```devcontainer.json``` file) to your peer to set up the same development environment.
+The development container is not limited to Docker images, it supports [Dockerfile](https://code.visualstudio.com/docs/remote/create-dev-container#_dockerfile) and [Docker Compose](https://code.visualstudio.com/docs/remote/create-dev-container#_use-docker-compose) too. You can build your image(s) to match your development requirements, and then share ```Dockerfile``` and/or ```docker-compose.yml``` inside a ```.devcontainer``` folder (with a ```devcontainer.json``` file) to your peer to set up the same development environment.
 
-Please find more details about all devcontainer.json configuration file on the [VS Code - devcontainer.json reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference) page.
+Please find more details about all devcontainer.json configuration parameters on the [VS Code - devcontainer.json reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference) page.
 
 ### <a id="rtsdk_devcontainer_json"></a>The RTSDK devcontainer.json file
 
-Let's start with a ```devcontainer.json``` file that pulls the refinitivapis/realtimesdk_java from DockerHub repository. 
+Let's start with a ```devcontainer.json``` file that pulls the refinitivapis/realtimesdk_java from the DockerHub repository. 
 
 ```
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/
 {
-	"name": "RTSDK_Java",
-	"image": "refinitivapis/realtimesdk_java:latest",
-	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
+    "name": "RTSDK_Java",
+    "image": "refinitivapis/realtimesdk_java:latest",
+    "workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
 }
 ```
 The ```devcontainer.json``` file above sets the following development properties:
@@ -94,7 +94,7 @@ You can connect to the container and start developing within it by selecting the
 
 ![figure-3](images/03_reopen_in_container_1.png "Reopen in Container  menu 1")
 
-Alternatively, the VS Code can detect whether there is a folder contains a Dev container configuration file, and then asks you if you want to reopen folder in a container.
+Alternatively, the VS Code can detect whether there is a folder containing a Dev container configuration file, and then asks you if you want to reopen the folder in a container.
 
 ![figure-4](images/04_reopen_in_container_2.png "Reopen in Container  menu 2")
 
@@ -116,7 +116,7 @@ Now your VS Code and Dev container are ready to run.
 
 ### <a id="emajava_running"></a>Running the RTSDK Java Examples
 
-All files and sub-folders are available in the Code explorer. If you open a terminal (``` Ctrl+` ``` or ``` Ctrl+Shift+` ``` - Windows), the current location is  **/opt/refinitiv/Real-Time-SDK/Java** folder too (You can navigate to other locations in the container as well)
+All files and sub-folders are available in the VS Code explorer. If you open a terminal (``` Ctrl+` ``` or ``` Ctrl+Shift+` ``` - Windows), the current location is  **/opt/refinitiv/Real-Time-SDK/Java** folder too (You can navigate to other locations in the container as well)
 
 ![figure-8](images/08_pull_container_success.png "Pull and Build dev container success")
 
@@ -133,7 +133,7 @@ Next, open a new terminal in the same VS Code editor with the ``` Ctrl+Shift+` `
 ```
 $>./gradlew runconsumer100
 ```
-The results of EMA Java Consumer - Interactive Provider examples scenario is shown below.
+The results of the EMA Java Consumer - Interactive Provider examples scenario are shown below.
 
 ![figure-9](images/09_run_examples.gif "Running Consumer and Interactive Provider examples")
 
@@ -151,29 +151,29 @@ If you have your own RTDS server in your environment, you can modify the example
 
 ![figure-11](images/11_rtds_code.png "Modify the code")
 
-Then, developers can run this example application with ```./gradlew runconsumer100``` command.
+Then, developers can run this example application with the ```./gradlew runconsumer100``` command.
 
 Please find more details regarding how to run the RTSDK Java examples on the [RTSDK Java - Quick Start](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java/quick-start) page.
 
 ## <a id="dev_container_folder"></a>File Sharing between the Host and Dev Container
 
-Please note that all changes (newly created/modified files and folders) stay in the Dev container as long as the container is exist (status **Up** and **Exited**). However, if you remove the container (```docker rm```), that container and its data are destroyed. You can additional mount points to add to the container when created for sharing files between the host and Dev container with a devcontainer.json's ```mounts``` attribute.
+Please note that all changes (newly created/modified files and folders) stay in the Dev container as long as the container exists (status **Up** and **Exited**). However, if you remove the container (```docker rm```), that container and its data are destroyed. You can additionally mount points to add to the container when created for sharing files between the host and Dev container with a devcontainer.json's ```mounts``` attribute.
 
 ```
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/
 {
-	"name": "RTSDK_Java",
-	"image": "refinitivapis/realtimesdk_java:latest",
-	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
-	"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
+    "name": "RTSDK_Java",
+    "image": "refinitivapis/realtimesdk_java:latest",
+    "workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
+    "mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
 }
 
 ```
 
-The ```devcontainer.json``` file above mounts the current ```<host workspace location>/log``` folder to the ```/opt/refinitiv/Real-Time-SDK/Java/log``` folder in a container. If the folder are not exist (either host or container), the VS Code automatic creates folder(s) for you.
+The ```devcontainer.json``` file above mounts the current ```<host workspace location>/log``` folder to the ```/opt/refinitiv/Real-Time-SDK/Java/log``` folder in a container. If the folder does not exist (either host or container), the VS Code automatically creates a folder(s) for you.
 
-**Caution**: Please note that if you mount a host folder to existing container folder (example: /opt/refinitiv/Real-Time-SDK/Java), the container folder will be replaced by a host folder.
+**Caution**: Please note that if you mount a host folder to an existing container folder (example: /opt/refinitiv/Real-Time-SDK/Java), the container folder will be replaced by a host folder.
 
 Please find more details regarding the mounts property from the [VS Code - Add another local file mount](https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount#advancedcontainers-articles) page.
 
@@ -213,7 +213,7 @@ java.util.logging.FileHandler.pattern=/opt/refinitiv/Real-Time-SDK/Java/log/ema.
 java.util.logging.SimpleFormatter.format=%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS.%1$tL %4$-7s %2$s %n%5$s
 ```
 
-A logging configuration file sets the EMA API to logs all API messages to the ```/opt/refinitiv/Real-Time-SDK/Java/log/ema.log``` file. 
+A logging configuration file sets the EMA API to log all API messages to the ```/opt/refinitiv/Real-Time-SDK/Java/log/ema.log``` file. 
 
 Finally, run the EMA Java ex450_MP_QueryServiceDiscovery RTO example with the ```-PvmArgs="-Djava.util.logging.config.file=/opt/refinitiv/Real-Time-SDK/Java/log/logging.properties"``` argument.
 
@@ -221,7 +221,7 @@ Finally, run the EMA Java ex450_MP_QueryServiceDiscovery RTO example with the ``
 ```
 $>../gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>" -PvmArgs="-Djava.util.logging.config.file=/opt/refinitiv/Real-Time-SDK/Java/log/logging.properties"
 ```
-Then the API activities, HTTP REST messages log messages are stored inn the ```ema.log``` file, the logging.properties and log files are available in the host machine too.
+Then the API activities, HTTP REST messages log messages are stored in the ```ema.log``` file, the logging.properties and log files are available in the host machine too.
 
 ![figure-16](images/16_log_success.png "Log success")
 
@@ -235,10 +235,10 @@ To run the Dev container with the RTSDK C++ Docker image, you can set a ```devco
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/
 {
-	"name": "RTSDK_CPP",
-	"image": "refinitivapis/realtimesdk_c:latest",
-	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Cpp-C",
-	"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
+    "name": "RTSDK_CPP",
+    "image": "refinitivapis/realtimesdk_c:latest",
+    "workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Cpp-C",
+    "mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"]
 }
 ```
 Then, run the "Remote-Containers: Rebuild and Reopen in Container" command (or "Remote-Containers: Reopen in Container" if you are running the Dev container for the first time). After the build completes, VS Code automatically connects to the container at the path we set to the ```workspaceFolder``` property which is the **/opt/refinitiv/Real-Time-SDK/Cpp-c** folder with all pre-installed dependencies and build system.
@@ -273,7 +273,7 @@ Now the VS Code editor is ready to run RTSDK Java (or C++) Dev container.
 
 ## <a id="conclusion"></a>Conclusion and Next Steps
 
-Docker is an open containerization platform for developing, testing, deploying, and running any software application. It helps developers create a consistent development environment without manually maintain dependencies and toolsets for the project. The VS Code [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension lets developers work with Docker easier by integrating the editor into a Docker container as a full-featured development environment. The extension allows developers open any folder inside (or mounted into) a container and take advantage of VS Code rich feature set.
+Docker is an open containerization platform for developing, testing, deploying, and running any software application. It helps developers create a consistent development environment without manually maintaining dependencies and toolsets for the project. The VS Code [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension lets developers work with Docker easier by integrating the editor into a Docker container as a full-featured development environment. The extension allows developers to open any folder inside (or mounted into) a container and take advantage of the VS Code rich feature set.
 
 This example project is just a brief introduction to the Remote - Containers extension. Developers can work with [Dockerfile](https://code.visualstudio.com/docs/remote/create-dev-container#_dockerfile) and [Docker Compose](https://code.visualstudio.com/docs/remote/create-dev-container#_use-docker-compose) to build a customized Docker image that match the development requirements, [debugging](https://code.visualstudio.com/docs/remote/containers#_debugging-in-a-container), install various VS Code extensions to use in the Dev Container (via the [GUI](https://code.visualstudio.com/docs/remote/containers#_managing-extensions) or [configuration file](https://code.visualstudio.com/docs/remote/containers#_adding-an-extension-to-devcontainerjson)), [clone Docker container from Git repository](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume), [attach the VS Code to a running container](https://code.visualstudio.com/docs/remote/containers#_attach-to-existing-container), [port forwarding](https://code.visualstudio.com/docs/remote/containers#_always-forwarding-a-port), and much more. I highly recommend you check the following VS Code resources fore more details:
 * [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
@@ -282,9 +282,9 @@ This example project is just a brief introduction to the Remote - Containers ext
 * [devcontainer.json reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference)
 
 
-The [refinitivapis/realtimesdk_c](https://hub.docker.com/r/refinitivapis/realtimesdk_c), [refinitivapis/realtimesdk_java](https://hub.docker.com/r/refinitivapis/realtimesdk_java), and [refinitivapis/websocket_api](https://hub.docker.com/r/refinitivapis/websocket_api) docker images are the good starting points for developers who new to the [Refinitiv Real-Time SDK](https://developers.refinitiv.com/en/use-cases-catalog/refinitiv-real-time). Developers can use the Docker image with the Remote - Containers extensions to set up a development environment and run the SDK examples on the VS Code editor with just a simple steps.  
+The [refinitivapis/realtimesdk_c](https://hub.docker.com/r/refinitivapis/realtimesdk_c), [refinitivapis/realtimesdk_java](https://hub.docker.com/r/refinitivapis/realtimesdk_java), and [refinitivapis/websocket_api](https://hub.docker.com/r/refinitivapis/websocket_api) docker images are the good starting points for developers who new to the [Refinitiv Real-Time SDK](https://developers.refinitiv.com/en/use-cases-catalog/refinitiv-real-time). Developers can use the Docker image with the Remote - Containers extensions to set up a development environment and run the SDK examples on the VS Code editor with just simple steps.  
 
-If you are the developers who already familiar with Maven, I highly recommend you check the [How to deploy and run Real-Time Java Application with Maven in Docker](https://developers.refinitiv.com/en/article-catalog/article/how-to-deploy-and-run-real-time-java-application-with-maven-in-d) that shows how to use Maven to set up the RTSDK JAva development and build environment via Docker
+If you are the developers who are already familiar with Maven, I highly recommend you check the [How to deploy and run Real-Time Java Application with Maven in Docker](https://developers.refinitiv.com/en/article-catalog/article/how-to-deploy-and-run-real-time-java-application-with-maven-in-d) that shows how to use Maven to set up the RTSDK Java development and build environment via Docker
 
 ## <a id="ref"></a>References
 
@@ -306,4 +306,4 @@ For further details, please check out the following resources:
 * [Development Acceleration Through VS Code Remote Containers: An Introduction](https://stelligent.com/2020/03/20/development-acceleration-through-vs-code-remote-containers-an-introduction/) blog post.
 
 
-For any questions related to this article or RTSDK page, please use the Developer Community [Q&A Forum](https://community.developers.refinitiv.com/spaces/71/index.html).
+For any questions related to this article or the RTSDK page, please use the Developer Community [Q&A Forum](https://community.developers.refinitiv.com/spaces/71/index.html).
