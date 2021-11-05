@@ -133,7 +133,7 @@ The first step is to unzip or download the example project folder into a directo
 
 ![figure-3b](images/03_reopen_in_container_1.png "Reopen in Container  menu 1")
 
-Now the VS Code editor is ready to run RTSDK Java (or C++) Dev container. Please see the full details over the RTSDK and VS Code Dev Container integrations on the [RTSDK_DevContainer.md](.\RTSDK_DevContainer.md) file.
+Now the VS Code editor is ready to run RTSDK Java (or C++) Dev container. Please see the full details over the RTSDK and VS Code Dev Container integrations on the [RTSDK_DevContainer.md](\RTSDK_DevContainer.md) file.
 
 ![running-demo](images/running_emajava_result.gif "RTSDK Java Dev Container demo")
 
