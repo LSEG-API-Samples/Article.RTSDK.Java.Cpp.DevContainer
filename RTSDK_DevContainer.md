@@ -64,7 +64,7 @@ Alternatively, the VS Code can detect whether there is a folder containing a Dev
 
 ![figure-4](images/04_reopen_in_container_2.png "Reopen in Container  menu 2")
 
-Next, the VS Code window (instance) will reload, pull (or clone) the image, and start building the dev container. Please note that if the image already a
+Next, the VS Code window (instance) will reload, pull (or clone) the image, and start building the dev container.
 
 ![figure-5](images/05_pulling_container.png "Pull and Build dev container")
 
