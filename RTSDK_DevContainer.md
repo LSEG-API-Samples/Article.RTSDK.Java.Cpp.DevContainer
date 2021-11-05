@@ -94,7 +94,7 @@ Firstly, open a terminal and run the EMA Java IProvider example 200.
 $>./gradlew runiprovider200
 ```
 
-Next, open a new terminal in the same VS Code editor with the ``` Ctrl+Shift+` ``` command, and run the EMA Java Consumer example 200.
+Next, open a new terminal in the same VS Code editor with the ``` Ctrl+Shift+` ``` command, and run the EMA Java Consumer example 100.
 
 ```
 $>./gradlew runconsumer100
@@ -106,7 +106,7 @@ The results of the EMA Java Consumer - Interactive Provider examples scenario ar
 You can run the RTO example, EMA Java ex450_MP_QueryServiceDiscovery with the following command.
 
 ```
-$>../gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>"
+$>./gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>"
 ```
 
 The result is shown below.
@@ -186,7 +186,7 @@ Finally, run the EMA Java ex450_MP_QueryServiceDiscovery RTO example with the ``
 
 
 ```
-$>../gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>" -PvmArgs="-Djava.util.logging.config.file=/opt/refinitiv/Real-Time-SDK/Java/log/logging.properties"
+$>./gradlew runconsumer450 -PcommandLineArgs="-username Machine-ID -password RTO-Password -clientId App_Key -itemName <RIC name>" -PvmArgs="-Djava.util.logging.config.file=/opt/refinitiv/Real-Time-SDK/Java/log/logging.properties"
 ```
 Then the API activities, HTTP REST messages log messages are stored in the ```ema.log``` file, the logging.properties and log files are available in the host machine too.
 
@@ -213,7 +213,7 @@ Then, run the "Remote-Containers: Rebuild and Reopen in Container" command (or "
 
 ![figure-17](images/17_rtsdkcpp_container.png "Dev container RTSDK C++")
 
-Then you can run the RTSDK C++ example in this Dev Container. If you make some changes to the RTSDK C++ example codes (either ETA or EMA), you can re-build the examples by running a ```make``` command in the container */opt/refinitiv/Real-Time-SDK/rtsdk* folder.
+You can run the RTSDK C++ example in this Dev Container. If you make some changes to the RTSDK C++ example codes (either ETA or EMA), you can re-build the examples by running a ```make``` command in the container */opt/refinitiv/Real-Time-SDK/rtsdk* folder.
 
 ![figure-18](images/18_rtsdkcpp_rto_example.gif "RTSDK C++ EMA RTO")
 
