@@ -174,3 +174,7 @@ For further details, please check out the following resources:
 
 
 For any questions related to this article or the RTSDK page, please use the Developer Community [Q&A Forum](https://community.developers.refinitiv.com/spaces/71/index.html).
+
+## Developers Articles
+- [https://developers.refinitiv.com/](https://developers.refinitiv.com/en/article-catalog/article/how-to-use-the-refinitiv-real-time-sdk-docker-images-on-the-visu)
+- [Medium](https://medium.com/refinitivdeveloper/how-to-use-the-visual-studio-code-remote-containers-extension-with-real-time-sdk-docker-image-4826f6f9e236)
