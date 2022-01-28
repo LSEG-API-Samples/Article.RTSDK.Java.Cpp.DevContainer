@@ -150,7 +150,7 @@ Please find more details regarding the mounts property from the [VS Code - Add a
 
 ### <a id="emajava_log"></a>Adding EMA Java Log
 
-The best scenario to demonstrate this feature is enabling the EMA API log messages to capture the API and HTTP REST activities. You do not need to close the remote-connection before updating the devcontainer.json. You can choose the "Open Container Configuration File" in the remote connection menu to open the current devcontainer.json file.
+The best way to demonstrate this feature is enabling the EMA API log messages to capture the API and HTTP REST activities. You do not need to close the remote-connection before updating the devcontainer.json. You can choose the "Open Container Configuration File" in the remote connection menu to open the current devcontainer.json file.
 
 ![figure-12](images/12_open_configuration.png "Open container config file")
 
@@ -162,7 +162,7 @@ Next, choose the "Rebuild Container" from the remote connection menu.
 
 ![figure-14](images/14_rebuild_container.png "Rebuild container")
 
-After the re-build completes, VS Code automatically creates log folders on the host file system and  */opt/refinitiv/Real-Time-SDK/Java/log* container's folder.  
+After the re-build completes, VS Code automatically creates log folder on the host file system and  */opt/refinitiv/Real-Time-SDK/Java/log* container's folder.  
 
 The ```ls``` command helps verify the presence of the mounted folder:
 
