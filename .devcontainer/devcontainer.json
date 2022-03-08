@@ -4,6 +4,8 @@
 	"name": "RTSDK_Java",
 	"image": "refinitivapis/realtimesdk_java:latest",
 	"workspaceFolder": "/opt/refinitiv/Real-Time-SDK/Java",
-	"mounts": ["source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"],
+	"mounts": [
+		"source=${localWorkspaceFolder}/log,target=${containerWorkspaceFolder}/log,type=bind,consistency=cached"
+	],
 	"shutdownAction":"stopContainer"
 }
