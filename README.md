@@ -1,8 +1,8 @@
 # Develop with Refinitiv Real-Time SDK Docker Image in VS Code Using the Remote - Containers extension
-- version: 1.0.0
-- Last update: January 2022
+- version: 1.0.1
+- Last update: March 2022
 - Environment: Docker
-- Compiler: Java
+- Compiler: Java, C/C++
 - Prerequisite: [Demo prerequisite](#prerequisite)
 
 ## <a id="intro"></a>Introduction
