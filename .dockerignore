@@ -1,0 +1,7 @@
+images/
+*.md
+.git/
+images/
+video/
+log/
+.gitignore
