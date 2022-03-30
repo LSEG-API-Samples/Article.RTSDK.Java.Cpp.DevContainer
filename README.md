@@ -180,5 +180,5 @@ For any questions related to this article or the RTSDK page, please use the Deve
 
 ## Developers Articles
 
-* [Develop with Refinitiv Real-Time SDK Docker Image in VS Code Using the Remote-Containers extension](https://developers.refinitiv.com/en/article-catalog/article/how-to-use-the-refinitiv-real-time-sdk-docker-images-on-the-visu) article.
+* [Develop with Refinitiv Real-Time SDK Docker Image in VS Code Using the Remote-Containers extension](https://developers.refinitiv.com/en/article-catalog/article/develop-with-refinitiv-real-time-sdk-docker-image-in-vs-code) article.
 * [Develop with Refinitiv Real-Time SDK Docker Image in VS Code Using the Remote-Containers extension](https://medium.com/refinitivdeveloper/how-to-use-the-visual-studio-code-remote-containers-extension-with-real-time-sdk-docker-image-4826f6f9e236) Medium post.
